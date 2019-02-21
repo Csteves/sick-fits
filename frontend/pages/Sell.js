@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link'
-const Sell = props => {
+const sell = props => {
     return(
         <>
         <h1>Sell</h1>
@@ -11,4 +11,4 @@ const Sell = props => {
 
 }
 
-export default Sell;
+export default sell;
