@@ -6,7 +6,6 @@ class index extends Component {
         return (
             <div>
                 <Items/>
-
             </div>
         );
     }
