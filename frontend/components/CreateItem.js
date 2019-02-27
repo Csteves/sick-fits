@@ -38,7 +38,22 @@ class CreateItem extends Component {
         let val = type === 'number' ? parseFloat(value) : value
         this.setState({[name]:val})
     }
-
+    uploadFile = async(e) =>{
+        const files = e.target.files;
+        const data = new FormData();
+        data.append('file', files[0]);
+        data.append('upload_preset', 'sickfits');
+        const res = await fetch('https://api.cloudinary.com/v1_1/dkhuytj2r/image/upload', {
+            method: 'POST',
+            body:data
+        });
+        const file = await res.json();
+        console.log(file);
+        this.setState({
+            image: file.secure_url,
+            largeImage:file.eager[0].secure_url
+        })
+    }
     render() {
         return (
             <Mutation mutation={CREATE_ITEM_MUTATION} variables={this.state} >
@@ -56,7 +71,15 @@ class CreateItem extends Component {
                     <h1>Sell an Item.</h1>
                     <label htmlFor="image">
                     Image
-                    <input type="file" id="image" name="image" placeholder=""/>
+                    <input
+                    type="file"
+                    id="image"
+                    name="image"
+                    placeholder=""
+                    onChange={this.uploadFile}
+                    required
+                    />
+                    {this.state.image && <img src={this.state.image} alt='image preview' />}
                     </label>
                     <label htmlFor="title">
                     Title
