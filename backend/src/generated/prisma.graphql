@@ -1,5 +1,5 @@
 # source: https://us1.prisma.sh/craigstevens044/sick-fits/dev
-# timestamp: Tue Feb 19 2019 21:01:45 GMT-0700 (Mountain Standard Time)
+# timestamp: Wed Feb 27 2019 00:25:08 GMT-0700 (Mountain Standard Time)
 
 type AggregateItem {
   count: Int!
@@ -18,8 +18,8 @@ type Item implements Node {
   id: ID!
   title: String!
   description: String!
-  image: String!
-  largeImage: String!
+  image: String
+  largeImage: String
   price: Int!
 }
 
@@ -36,8 +36,8 @@ type ItemConnection {
 input ItemCreateInput {
   title: String!
   description: String!
-  image: String!
-  largeImage: String!
+  image: String
+  largeImage: String
   price: Int!
 }
 
@@ -73,8 +73,8 @@ type ItemPreviousValues {
   id: ID!
   title: String!
   description: String!
-  image: String!
-  largeImage: String!
+  image: String
+  largeImage: String
   price: Int!
 }
 
