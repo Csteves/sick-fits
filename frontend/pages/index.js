@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import Items from '../components/Items';
 
-class index extends Component {
-    render() {
+const Home = (props) => {
         return (
             <div>
-                <Items/>
+                <Items page={parseFloat(props.query.page || 1)} />
             </div>
         );
-    }
+
 }
 
-export default index;
+export default Home;
