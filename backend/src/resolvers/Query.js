@@ -6,6 +6,7 @@ const Query = {
     itemsConnection: forwardTo('db'),
     me(parent, args, ctx, info) {
         // check if there is a current user ID
+        // ctx.request is the express.server object
         if (!ctx.request.userId) {
           return null;
         }
