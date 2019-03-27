@@ -22,7 +22,6 @@ const mutations = {
                 ...args
             }
         }, info);
-        console.log(item)
         return item;
     },
     updateItem(parent, args, ctx, info) {
@@ -44,10 +43,17 @@ const mutations = {
     async deleteItem(parent, args, ctx, info) {
         const where = { id: args.id };
         //find the item
-        const item = await ctx.db.query.item({ where }, '{id, title}')
+        const item = await ctx.db.query.item({ where }, '{id, title, user{id}}');
         // check if they own that item, or have the permissions
-        // delete it
+        const ownsItem = item.user.id === ctx.request.userId;
+        const hasPermission = ctx.request.user.permissions.some((permission => (
+            permission === 'ADMIN' || permission === 'ITEMDELETE'
+        )))
+        if(!ownsItem && !hasPermission){
+            throw new Error("You do not have privledge to do that!")
+        }
         return ctx.db.mutation.deleteItem({ where }, info)
+
     },
     async signup(parent, args, ctx, info) {
         // Lower case their email
