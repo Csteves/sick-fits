@@ -13,6 +13,7 @@ type Mutation{
   requestReset(email: String!): SuccessMessage
   resetPassword(resetToken: String!, password: String!, confirmPassword: String!):User!
   updatePermissions(userId:ID!, permissions:[Permission]):User!
+  addToCart(id:ID!): CartItem
 }
 
 type Query {
@@ -30,4 +31,5 @@ type User{
   email: String!
   password: String!
   permissions: [Permission!]!
+  cart: [CartItem!]!
 }
